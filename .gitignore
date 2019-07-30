@@ -1,0 +1,5 @@
+*.pyc
+*.pyo
+.z3-trace
+*.log
+*.log.err
