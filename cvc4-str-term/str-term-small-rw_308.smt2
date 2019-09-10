@@ -1,0 +1,6 @@
+(set-logic QF_S)
+(declare-fun x () String)
+(declare-fun y () String)
+(declare-fun z () Int)
+(assert (not (= (str.substr "B" z (+ 1 1)) (str.at "B" z))))
+(check-sat)

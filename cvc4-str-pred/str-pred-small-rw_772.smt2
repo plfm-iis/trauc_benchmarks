@@ -1,0 +1,6 @@
+(set-logic QF_S)
+(declare-fun x () String)
+(declare-fun y () String)
+(declare-fun z () Int)
+(assert (not (= (str.suffixof (str.replace "A" "B" x) x) (str.suffixof "A" x))))
+(check-sat)
