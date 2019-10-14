@@ -74,7 +74,7 @@ def check(tool_name: str, command: List[str], benchmark_files: List[str], time_o
             res = 'sat'
         elif out == 'timeout':
             res = 'timeout'
-        elif out == 'exception':
+        elif 'exception' in out:
             res = 'exception'
             result_except = True
         elif 'unknown' in out:
@@ -100,7 +100,9 @@ def check(tool_name: str, command: List[str], benchmark_files: List[str], time_o
         # Record every output to fp_err
         if result_except:
             print(f'ERROR_REPORT: {out_err}')
-        fp_err.write(f'{log_str}\nstdout: {out}\n\n')
+            fp_err.write(f'{log_str}\nstdout: {out}\n{out_err}\n\n')
+        else:
+            fp_err.write(f'{log_str}\nstdout: {out}\n\n')
 
         # Store -tr:strg to trace/
         if "trauc" in command[0]:
