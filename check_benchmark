@@ -85,8 +85,8 @@ def check(tool_name: str, command: List[str], benchmark_files: List[str], time_o
             result_except = True
             # print(f'unexpected output: {out}')
 
-        if result_except:
-            out = 'exception'
+#        if result_except:
+#            out = 'exception'
 
         # detect error message
         if res == 'timeout' or res == 'exception':
@@ -100,7 +100,7 @@ def check(tool_name: str, command: List[str], benchmark_files: List[str], time_o
         # Record every output to fp_err
         if result_except:
             print(f'ERROR_REPORT: {out_err}')
-            fp_err.write(f'{log_str}\nstdout: {out}\n{out_err}\n\n')
+            fp_err.write(f'{log_str}\nstdout: {out}\nstderr:{out_err}\n\n')
         else:
             fp_err.write(f'{log_str}\nstdout: {out}\n\n')
 
