@@ -106,7 +106,7 @@ def main(argv):
     benchmark_log_name = args.benchmark_log_name
     # prepare benchmark
     all_log_files = [f for f in os.listdir('.')
-                     if re.match(re.escape(benchmark_log_name) + r'\.[0-9]+\.[a-zA-z0-9]+\.log$', f)]
+                     if re.match(re.escape(benchmark_log_name) + r'\.[0-9]+\.[a-zA-z0-9-_+]+\.log$', f)]
     print('log files read:')
     print('  ' + '\n  '.join(all_log_files))
 
