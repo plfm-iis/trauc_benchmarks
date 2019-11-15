@@ -28,7 +28,7 @@ DEFAULT_CMDS = {'cvc4': ['cvc4', '--lang', 'smt', '--strings-exp', '--quiet'],
                 'z3-trau': ['z3-trau', 'smt.string_solver=trau'],
                 'abc': ['abc', '-i'],
                 'ostrich': ['ostrich'], # make sure the scrip in /usr/local/bin or /usr/bin has option '+quiet'
-                'trauplus': ['trau']}
+                'trauplus': ['trauplus']}
 
 # expected error messages
 ERROR_MSGS = {'VIOLATION', 'segfault', 'dumped', 'exception'}
