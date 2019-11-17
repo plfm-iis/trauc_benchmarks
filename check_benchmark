@@ -58,8 +58,8 @@ def check(tool_name: str, command: List[str], benchmark_files: List[str], time_o
         try:
             out = str(check_output(shell_command, stderr=STDOUT, timeout=time_out))
         except CalledProcessError as err:
-            out_err = str(err.output)
-            out = 'exception'
+            out = str(err.output) # assign err.output to out in case get_model exception whcn in cases unsat or unknown whcih should be taken as normal output.
+            our_err = 'moved to stdout' # not to print same message twice.
             result_except = True
         except TimeoutExpired as err:
             out_err = str(err.output)
@@ -77,12 +77,12 @@ def check(tool_name: str, command: List[str], benchmark_files: List[str], time_o
             res = 'sat'
         elif out == 'timeout':
             res = 'timeout'
-        elif 'exception' in out or 'exception' in out_err:
-            res = 'exception'
-            result_except = True
         elif 'unknown' in out:
             result_except = False
             res = 'unknown'
+        elif 'exception' in out or 'exception' in out_err:
+            res = 'exception'
+            result_except = True
         else:  # should not encounter this case
             res = '???'
             result_except = True
@@ -103,9 +103,9 @@ def check(tool_name: str, command: List[str], benchmark_files: List[str], time_o
         # Record every output to fp_err
         if result_except:
             print(f'ERROR_REPORT: {out_err}')
-            fp_err.write(f'{log_str}\nstdout: {out}\nstderr:{out_err}\n\n')
+            fp_err.write(f'{log_str}\n[STDOUT]: {out}\n[STDERR]:{out_err}\n\n')
         else:
-            fp_err.write(f'{log_str}\nstdout: {out}\n\n')
+            fp_err.write(f'{log_str}\n[STDOUT]: {out}\n\n')
 
         # Store -tr:strg to trace/
         if "trauc" in command[0]:
