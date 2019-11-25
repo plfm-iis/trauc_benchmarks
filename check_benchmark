@@ -66,6 +66,8 @@ def check(tool_name: str, command: List[str], benchmark_files: List[str], time_o
             out = 'timeout'
         time_end = time.time()
         time_exec = time_end - time_start
+        # remove filename from out if tool is trauplus
+        out = out.replace(file,'')  # remove filename in case it is printed out by tool and contains 'sat' or 'unsat'
         # print(f'execution time: {time_exec} (sec.)')
         # print(f'output: {output}')
         out = out.splitlines()[-1]
