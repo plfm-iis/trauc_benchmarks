@@ -1,0 +1,90 @@
+log files read:
+  full_str_int.20200106.cvc4.log
+benchmark_path: /home/ubuntu/repositories/trauc_benchmarks/full_str_int
+benchmark_size: 21573
+(tool-check_date, #sat, #unsat, #timeout, #unknown, #exception/error, #misc)
+(cvc4-20200106, 4239, 16972, 362, 0, 0, 0)
+
+log files read:
+  cvc4-str-term.20200106.cvc4.log
+benchmark_path: /home/ubuntu/repositories/trauc_benchmarks/cvc4-str-term
+benchmark_size: 1045
+(tool-check_date, #sat, #unsat, #timeout, #unknown, #exception/error, #misc)
+(cvc4-20200106, 8, 1026, 10, 1, 0, 0)
+
+log files read:
+  cvc4-str-pred.20200106.cvc4.log
+benchmark_path: /home/ubuntu/repositories/trauc_benchmarks/cvc4-str-pred
+benchmark_size: 835
+(tool-check_date, #sat, #unsat, #timeout, #unknown, #exception/error, #misc)
+(cvc4-20200106, 11, 818, 6, 0, 0, 0)
+
+log files read:
+  stringfuzz.20200106.cvc4.log
+benchmark_path: /home/ubuntu/repositories/trauc_benchmarks/stringfuzz
+benchmark_size: 1065
+(tool-check_date, #sat, #unsat, #timeout, #unknown, #exception/error, #misc)
+(cvc4-20200106, 719, 253, 93, 0, 0, 0)
+
+log files read:
+  str_2.20200106.cvc4.log
+benchmark_path: /home/ubuntu/repositories/trauc_benchmarks/str_2
+benchmark_size: 600
+(tool-check_date, #sat, #unsat, #timeout, #unknown, #exception/error, #misc)
+(cvc4-20200106, 51, 216, 333, 0, 0, 0)
+
+log files read:
+  slog.20200107.cvc4.log
+benchmark_path: /home/ubuntu/repositories/trauc_benchmarks/slog
+benchmark_size: 3391
+(tool-check_date, #sat, #unsat, #timeout, #unknown, #exception/error, #misc)
+(cvc4-20200107, 1309, 2082, 0, 0, 0, 0)
+
+log files read:
+  Leetcode.20200106.cvc4.log
+benchmark_path: /home/ubuntu/repositories/trauc_benchmarks/Leetcode
+benchmark_size: 2666
+(tool-check_date, #sat, #unsat, #timeout, #unknown, #exception/error, #misc)
+(cvc4-20200106, 876, 1785, 5, 0, 0, 0)
+
+log files read:
+  PyEx_unsat.20200106.cvc4.log
+benchmark_path: /home/ubuntu/repositories/trauc_benchmarks/PyEx_unsat
+benchmark_size: 3834
+(tool-check_date, #sat, #unsat, #timeout, #unknown, #exception/error, #misc)
+(cvc4-20200106, 0, 3834, 0, 0, 0, 0)
+
+log files read:
+  PyEx_sat.20200106.cvc4.log
+benchmark_path: /home/ubuntu/repositories/trauc_benchmarks/PyEx_sat
+benchmark_size: 19763
+(tool-check_date, #sat, #unsat, #timeout, #unknown, #exception/error, #misc)
+(cvc4-20200106, 19537, 0, 226, 0, 0, 0)
+
+log files read:
+  PyEx_todo.20200106.cvc4.log
+benchmark_path: /home/ubuntu/repositories/trauc_benchmarks/PyEx_todo
+benchmark_size: 1824
+(tool-check_date, #sat, #unsat, #timeout, #unknown, #exception/error, #misc)
+(cvc4-20200106, 1157, 26, 641, 0, 0, 0)
+
+log files read:
+  Kaluza_unsat.20200106.cvc4.log
+benchmark_path: /home/ubuntu/repositories/trauc_benchmarks/Kaluza_unsat
+benchmark_size: 12014
+(tool-check_date, #sat, #unsat, #timeout, #unknown, #exception/error, #misc)
+(cvc4-20200106, 0, 12014, 0, 0, 0, 0)
+
+log files read:
+  Kaluza_sat.20200106.cvc4.log
+benchmark_path: /home/ubuntu/repositories/trauc_benchmarks/Kaluza_sat
+benchmark_size: 34932
+(tool-check_date, #sat, #unsat, #timeout, #unknown, #exception/error, #misc)
+(cvc4-20200106, 34932, 0, 0, 0, 0, 0)
+
+log files read:
+  Kaluza_todo.20200106.cvc4.log
+benchmark_path: /home/ubuntu/repositories/trauc_benchmarks/Kaluza_todo
+benchmark_size: 338
+(tool-check_date, #sat, #unsat, #timeout, #unknown, #exception/error, #misc)
+(cvc4-20200106, 310, 0, 28, 0, 0, 0)

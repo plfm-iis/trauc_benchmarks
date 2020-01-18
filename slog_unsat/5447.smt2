@@ -1,0 +1,8 @@
+(set-logic QF_S)
+(set-option :strings-exp true)
+(set-option :produce-models true)
+(declare-fun literal_2 () String)
+(assert (= literal_2 "\x73\x65\x6e\x64\x63\x61\x72\x64\x5f\x73\x65\x74\x75\x70\x2e\x70\x68\x70"))
+(assert (str.in.re literal_2 (re.++ (re.* re.allchar) (re.++ (str.to.re "\x2f\x65\x76\x69\x6c") (re.* re.allchar)))))
+(check-sat)
+(get-model)

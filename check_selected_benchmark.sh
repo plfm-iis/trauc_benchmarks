@@ -11,5 +11,5 @@ read -n 1 -s -r -p "tool_name = ${1}... Press any key to start."
 
 for bm in ${BM_LIST[*]}
 do
-    ./check_benchmark -c=${1} ${bm}
+    ./check_benchmark -c=${1} -t=30 ${bm}
 done

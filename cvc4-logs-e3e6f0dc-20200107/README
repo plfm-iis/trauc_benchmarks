@@ -1,0 +1,2 @@
+This directory stores logs from CVC4 commit e3e6f0dc(master)
+These logs are run with timeout 30 sec. and are used for separate benchmarks to sat/unsat/todo
