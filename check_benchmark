@@ -58,11 +58,11 @@ def check(tool_name: str, command: List[str], benchmark_files: List[str], time_o
         try:
             out = str(check_output(shell_command, stderr=STDOUT, timeout=time_out))
         except CalledProcessError as err:
-            # out = str(err.output) # assign err.output to out in case get_model exception whcn in cases unsat or unknown whcih should be taken as normal output.
-            # our_err = 'moved to stdout' # not to print same message twice.
-            out = 'exception'
-            our_err = str(err.output)
-            result_except = True
+            out = str(err.output) # assign err.output to out in case get_model exception whcn in cases unsat or unknown whcih should be taken as normal output.
+            out_err = 'moved to stdout' # not to print same message twice.
+            # out = 'exception'
+            # our_err = str(err.output)
+            # result_except = True
         except TimeoutExpired as err:
             out_err = str(err.output)
             out = 'timeout'
@@ -73,7 +73,10 @@ def check(tool_name: str, command: List[str], benchmark_files: List[str], time_o
         # print(f'execution time: {time_exec} (sec.)')
         # print(f'output: {output}')
         out = out.splitlines()[-1]
-        if 'unsat' in out or 'UNSAT' in out:
+        if contains_error_msg(out) or contains_error_msg(out_err):  # check error first!
+            res = 'error'
+            result_except = True
+        elif 'unsat' in out or 'UNSAT' in out:
             res = 'unsat'
             result_except = False
         elif 'sat' in out or 'SAT' in out:
@@ -84,9 +87,9 @@ def check(tool_name: str, command: List[str], benchmark_files: List[str], time_o
         elif 'unknown' in out:
             result_except = False
             res = 'unknown'
-        elif 'exception' in out or 'exception' in out_err:
-            res = 'exception'
-            result_except = True
+        #elif 'exception' in out or 'exception' in out_err:
+        #    res = 'exception'
+        #    result_except = True
         else:  # should not encounter this case
             res = '???'
             result_except = True
@@ -96,10 +99,10 @@ def check(tool_name: str, command: List[str], benchmark_files: List[str], time_o
 #            out = 'exception'
 
         # detect error message
-        if res == 'timeout' or res == 'exception':
-            if contains_error_msg(out_err):
-                res = 'error'
-                result_except = True
+        #if res == 'timeout' or res == 'exception':
+        #    if contains_error_msg(out_err):
+        #        res = 'error'
+        #        result_except = True
 
         log_str = f'{file}, {tool_name}, {res}, {"{:2.5f}".format(time_exec)}'
         print(log_str)
