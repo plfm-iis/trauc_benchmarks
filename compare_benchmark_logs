@@ -16,12 +16,6 @@ from typing import List
 from subprocess import STDOUT, check_output, CalledProcessError, TimeoutExpired
 
 
-# default commands
-DEFAULT_CMDS = {'cvc4': ['cvc4', '--lang', 'smt', '--strings-exp'],
-                'z3seq': ['z3'],
-                'z3str3': ['z3', 'smt.string_solver=z3str3'],
-                'trau': ['./trau', '-language', 'smt2.6'],
-                'trauc': ['./trauc', 'smt.string_solver=z3str3']}
 RECORD = List[str]
 
 
@@ -82,7 +76,9 @@ def compare_check_logs(check_logs: List[CheckLog]):
         num_exception = check_logs[i].count_result("exception")
         num_error = check_logs[i].count_result("error")
         num_exer = num_exception + num_error
-        num_misc = check_logs[i].benchmark_size - num_unsat - num_sat - num_timeout - num_unknown - num_exer
+        num_misc = check_logs[i].count_result("???")
+        # num_misc = check_logs[i].benchmark_size - num_unsat - num_sat - num_timeout - num_unknown - num_exer
+        assert num_misc == check_logs[i].benchmark_size - num_unsat - num_sat - num_timeout - num_unknown - num_exer
         print(f'({tool_date}, {num_sat}, {num_unsat}, {num_timeout}, {num_unknown}, {num_exer}, {num_misc})')
 
 
@@ -90,11 +86,12 @@ def main(argv):
     # Set argument parser
     arg_parser = ArgumentParser(prog=None,
                                 usage=None,
-                                description="A Python script to compare benchmark checking log of TrauC (z3qses) to "
-                                            "other string solvers.",
+                                description="A Python script to compare benchmark checking logs other string solvers.",
                                 epilog=None)
     arg_parser.add_argument("benchmark_log_name",
                             help="Filename of benchmark check log without extensions (before '.<date>.<tool>.log*')")
+    arg_parser.add_argument("-f", "--file", help="Specify a log file for just counting the results, <benchmark>.<date>.<tool>.log",
+                            dest="log_file", default='')
     args = arg_parser.parse_args()
 
     """
@@ -105,8 +102,11 @@ def main(argv):
     """
     benchmark_log_name = args.benchmark_log_name
     # prepare benchmark
-    all_log_files = [f for f in os.listdir('.')
-                     if re.match(re.escape(benchmark_log_name) + r'\.[0-9]+\.[a-zA-z0-9-_+]+\.log$', f)]
+    if args.log_file == '':
+        all_log_files = [f for f in os.listdir('.')
+                         if re.match(re.escape(benchmark_log_name) + r'\.[0-9]+\.[a-zA-z0-9-_+]+\.log$', f)]
+    else:
+        all_log_files = [args.log_file]
     print('log files read:')
     print('  ' + '\n  '.join(all_log_files))
 
