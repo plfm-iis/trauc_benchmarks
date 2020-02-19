@@ -72,37 +72,25 @@ def check(tool_name: str, command: List[str], benchmark_files: List[str], time_o
         out = out.replace(file,'')  # remove filename in case it is printed out by tool and contains 'sat' or 'unsat'
         # print(f'execution time: {time_exec} (sec.)')
         # print(f'output: {output}')
-        out = out.splitlines()[-1]
+        # out = out.splitlines()[-1]
         if contains_error_msg(out) or contains_error_msg(out_err):  # check error first!
             res = 'error'
             result_except = True
-        elif 'unsat' in out or 'UNSAT' in out:
+        elif 'unsat\\n' in out or 'UNSAT\\n' in out:
             res = 'unsat'
             result_except = False
-        elif 'sat' in out or 'SAT' in out:
-            result_except = False
+        elif 'sat\\n' in out or 'SAT\\n' in out:
             res = 'sat'
+            result_except = False
         elif out == 'timeout':
             res = 'timeout'
-        elif 'unknown' in out:
-            result_except = False
+        elif 'unknown\\n' in out or 'UNKNOWN\\n' in out:
             res = 'unknown'
-        #elif 'exception' in out or 'exception' in out_err:
-        #    res = 'exception'
-        #    result_except = True
+            result_except = False
         else:  # should not encounter this case
             res = '???'
             result_except = True
             # print(f'unexpected output: {out}')
-
-#        if result_except:
-#            out = 'exception'
-
-        # detect error message
-        #if res == 'timeout' or res == 'exception':
-        #    if contains_error_msg(out_err):
-        #        res = 'error'
-        #        result_except = True
 
         log_str = f'{file}, {tool_name}, {res}, {"{:2.5f}".format(time_exec)}'
         print(log_str)
@@ -110,7 +98,7 @@ def check(tool_name: str, command: List[str], benchmark_files: List[str], time_o
 
         # Record every output to fp_err
         if result_except:
-            print(f'ERROR_REPORT: {out_err}')
+            print(f'ERROR_REPORT: {out}')
             fp_err.write(f'{log_str}\n[STDOUT]: {out}\n[STDERR]: {out_err}\n\n')
         else:
             fp_err.write(f'{log_str}\n[STDOUT]: {out}\n\n')
