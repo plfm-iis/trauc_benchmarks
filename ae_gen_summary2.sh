@@ -19,7 +19,7 @@ for tool in ${TOOL_LIST[*]}; do
         _misc=$(cat ${bm}*.${tool}.log | grep ', ???' | wc -l)
         _wrong1=$(cat ${bm}*.${tool}.log | grep ', sat' | grep ${bm}_unsat/ | wc -l)
         _wrong2=$(cat ${bm}*.${tool}.log | grep ', unsat' | grep ${bm}_sat/ | wc -l)
-        echo ${tool} ${bm} ${_sat} ${_unsat} ${_unknown} ${_timeout} $((${_error}+${_misc})) $((${_wrong1}+${_wrong2}))>> ae.summary2
+        echo ${tool} ${bm} $((${_sat}-${_wrong1})) $((${_unsat}-${_wrong2})) ${_unknown} ${_timeout} $((${_error}+${_misc})) $((${_wrong1}+${_wrong2}))>> ae.summary2
     done
     for bm in ${CVC4_STR_SEP[*]}; do
         echo "counting:" ${tool}-cvc4-${bm}
@@ -28,10 +28,10 @@ for tool in ${TOOL_LIST[*]}; do
         _unknown=$(cat cvc4-str*.${tool}.log | grep ${bm} | grep ', unknown' | wc -l)
         _timeout=$(cat cvc4-str*.${tool}.log | grep ${bm} | grep ', timeout' | wc -l)
         _error=$(cat cvc4-str*.${tool}.log | grep ${bm} | grep ', error' | wc -l)
-        _misc=$(cat cvc4-str*.${tool}.log | grep ${bm} | grep ', misc' | wc -l)
+        _misc=$(cat cvc4-str*.${tool}.log | grep ${bm} | grep ', ???' | wc -l)
         _wrong1=$(cat cvc4-str*.${tool}.log | grep ${bm} | grep ', sat' | grep cvc4-str_unsat/ | wc -l)
         _wrong2=$(cat cvc4-str*.${tool}.log | grep ${bm} | grep ', unsat' | grep cvc4-str_sat/ | wc -l)
-        echo ${tool} ${bm} ${_sat} ${_unsat} ${_unknown} ${_timeout} $((${_error}+${_misc})) $((${_wrong1}+${_wrong2}))>> ae.summary2
+        echo ${tool} ${bm} $((${_sat}-${_wrong1})) $((${_unsat}-${_wrong2})) ${_unknown} ${_timeout} $((${_error}+${_misc})) $((${_wrong1}+${_wrong2}))>> ae.summary2
     done
     for bm in ${STR_INT_SEP[*]}; do
         echo "counting:" ${tool}-full_str_int-${bm}
@@ -43,7 +43,7 @@ for tool in ${TOOL_LIST[*]}; do
         _misc=$(cat full_str_int*.${tool}.log | grep ${bm} | grep ', ???' | wc -l)
         _wrong1=$(cat full_str_int*.${tool}.log | grep ${bm} | grep ', sat' | grep full_str_int_unsat/ | wc -l)
         _wrong2=$(cat full_str_int*.${tool}.log | grep ${bm} | grep ', unsat' | grep full_str_int_sat/ | wc -l)
-        echo ${tool} ${bm} ${_sat} ${_unsat} ${_unknown} ${_timeout} $((${_error}+${_misc})) $((${_wrong1}+${_wrong2}))>> ae.summary2
+        echo ${tool} ${bm} $((${_sat}-${_wrong1})) $((${_unsat}-${_wrong2})) ${_unknown} ${_timeout} $((${_error}+${_misc})) $((${_wrong1}+${_wrong2}))>> ae.summary2
     done
 done
 #echo "counting: checkluhn"
@@ -52,3 +52,4 @@ done
 #    echo "checkLuhn ${tool}" >> ae.summary.checkLuhn
 #    cat checkLuhn.*.${tool}.log | grep smt2 | cut -d' ' -f3,4 >> ae.summary.checkLuhn
 #done
+
